@@ -31,4 +31,4 @@ Political information is a snapshot dated **October 3, 2026**, not a live tracke
 
 The supplied Claude page is preserved in the repository's initial commit. The next commit brings the comparison forward, reduces the reading load, corrects the standard-time legislative alternative, and adds interactions. No API keys, tracking, or external runtime libraries are included. Google Fonts is optional; system fonts are used if unavailable.
 
-This repository has not been configured for hosting by this change. Its root files can be served by any static host. A fan project, not affiliated with the Washington Nationals.
+Both versions are publicly hosted with Sites. The revised explainer is at the root and the supplied draft is at `/original/`. GitHub remains the source copy. Run `npm run build` to copy public assets into `dist/`; `.openai/hosting.json` records the hosting project. Changes in GitHub do not automatically deploy to Sites. Its root files also remain compatible with GitHub Pages and other static hosts. A fan project, not affiliated with the Washington Nationals.

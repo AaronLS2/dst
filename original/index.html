@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Stay in the Fight: permanent daylight time vs. permanent standard time</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,700;0,800;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#F3F5FA;--panel:#FFFFFF;--ink:#14225A;--muted:#515C7C;--rule:#C9D0E2;--red:#AB0003;--sun:#F2B736;--sun-deep:#E08A1E;--night:#14225A;--dusk:#5E6FA8;--focus:#2F6BFF;--cond:'Barlow Condensed',Impact,'Arial Narrow',sans-serif;--serif:'Source Serif 4',Georgia,'Times New Roman',serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0C1633;--panel:#13204A;--ink:#F2F4FA;--muted:#B3BCD6;--rule:#2B3A6B;--red:#FF6B66;--night:#060D24;--dusk:#3B4B86}}
+:root[data-theme="dark"]{--bg:#0C1633;--panel:#13204A;--ink:#F2F4FA;--muted:#B3BCD6;--rule:#2B3A6B;--red:#FF6B66;--night:#060D24;--dusk:#3B4B86}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*,*::before,*::after{box-sizing:inherit}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased}main{max-width:42rem;margin:0 auto;padding:0 1.25rem 4rem}h1,h2,h3{font-family:var(--cond);line-height:1;margin:0;letter-spacing:-.005em}h1{font-weight:800;font-size:clamp(2.75rem,10vw,4.75rem);text-wrap:balance}h2{font-weight:800;font-size:clamp(2rem,6vw,2.75rem);margin-top:4.5rem;margin-bottom:1rem}h3{font-weight:700;font-size:1.6rem}p{margin:0 0 1.1rem;max-width:38rem}a{color:inherit;text-decoration-color:var(--dusk);text-underline-offset:3px}a:hover{text-decoration-color:var(--red)}:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:2px}em{font-style:italic}strong{font-weight:600}.kicker{font-family:var(--cond);font-weight:500;font-size:1.2rem;color:var(--muted);margin:2.5rem 0 1rem}.lede{font-size:1.2rem;line-height:1.5;margin-top:1.25rem}.aside{font-family:var(--cond);font-weight:500;font-style:italic;font-size:1.2rem;line-height:1.25;color:var(--red);margin:1.25rem 0 1.5rem;padding-left:.9rem;border-left:3px solid var(--red);max-width:34rem}.aside b{font-style:normal;font-weight:700;margin-right:.35rem}
+/* hero scoreboard */
+.board{margin:2rem 0 0;background:var(--night);color:#F8E8B0;border-radius:6px;padding:1rem 1.1rem;display:grid;grid-template-columns:1fr auto;gap:.25rem 1rem;align-items:end;font-family:var(--cond);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}.board .team{font-size:1.1rem;font-weight:500;letter-spacing:.04em;color:#C9D0E2}.board .rec{font-size:3.2rem;font-weight:800;line-height:1;font-variant-numeric:tabular-nums;color:var(--sun);text-shadow:0 0 12px rgba(242,183,54,.35)}.board .date{font-size:1.15rem;color:#C9D0E2;text-align:right}.board .result{grid-column:1/-1;font-size:1.25rem;font-weight:700;color:#fff;opacity:0;transition:opacity .6s}.board .result.on{opacity:1}
+/* day planner */
+.planner{background:var(--panel);border:1px solid var(--rule);border-radius:8px;padding:1rem 1rem 1.1rem;margin:1.5rem 0}.controls{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin-bottom:.9rem}.seg{display:inline-flex;border:1px solid var(--rule);border-radius:999px;overflow:hidden}.seg button{font-family:var(--cond);font-weight:700;font-size:1rem;padding:.4rem .8rem;background:transparent;color:var(--ink);border:0;cursor:pointer}.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}.chips{display:flex;flex-wrap:wrap;gap:.4rem;margin:.5rem 0 .25rem}.chips button{font-family:var(--cond);font-size:.95rem;font-weight:500;padding:.25rem .6rem;border-radius:999px;border:1px solid var(--rule);background:transparent;color:var(--muted);cursor:pointer}.chips button:hover{border-color:var(--ink);color:var(--ink)}.datebar{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin-top:.5rem}.datebar output{font-family:var(--cond);font-weight:800;font-size:2rem;line-height:1}.datebar small{font-family:var(--cond);font-size:1rem;color:var(--muted)}input[type=range]{width:100%;margin:.4rem 0 1rem;accent-color:var(--red)}.rows{position:relative}.row{display:grid;grid-template-columns:1fr;gap:.2rem;padding:.55rem 0;border-top:1px solid var(--rule)}.row:first-child{border-top:0}.row .lab{font-family:var(--cond);font-weight:700;font-size:1.15rem;display:flex;justify-content:space-between;align-items:baseline;gap:.75rem}.row .lab span{font-weight:500;font-size:1rem;color:var(--muted)}.row .lab .flag{color:var(--red);font-weight:700}.band{position:relative;height:26px;border-radius:4px;background:linear-gradient(90deg,var(--night),var(--dusk) 6%,var(--night) 12%,var(--night) 88%,var(--dusk) 94%,var(--night));overflow:hidden}.band .day{position:absolute;top:0;bottom:0;background:linear-gradient(90deg,var(--sun-deep),var(--sun) 15%,#FFE9A8 50%,var(--sun) 85%,var(--sun-deep));border-radius:3px;transition:left .45s cubic-bezier(.4,0,.2,1),width .45s cubic-bezier(.4,0,.2,1)}.band .tick{position:absolute;top:0;bottom:0;width:1px;background:rgba(255,255,255,.18)}.marks{position:relative;height:1.3rem;font-family:var(--cond);font-size:.85rem;color:var(--muted)}.marks span{position:absolute;transform:translateX(-50%);white-space:nowrap}.mark{position:absolute;top:0;bottom:0;width:0;border-left:2px dashed var(--red);opacity:.85;pointer-events:none;z-index:2}.mark i{position:absolute;top:-1.2rem;left:-2px;transform:translateX(-50%);font:700 .8rem var(--cond);font-style:normal;color:var(--red);white-space:nowrap}.mark.b i{transform:translateX(-50%)}.times{display:flex;justify-content:space-between;font-family:var(--cond);font-size:1rem;color:var(--muted);font-variant-numeric:tabular-nums}.times b{color:var(--ink);font-weight:700}@media (prefers-reduced-motion:reduce){.band .day{transition:none}}
+/* scouting reports */
+.report{margin:1.75rem 0 0;border-top:4px solid var(--ink);padding-top:.75rem}.report.sunny{border-top-color:var(--sun)}.report.std{border-top-color:var(--dusk)}.report .sub{font-family:var(--cond);font-size:1.15rem;color:var(--muted);margin:.25rem 0 1rem}.cols{display:grid;grid-template-columns:1fr;gap:0 2rem}@media (min-width:600px){.cols{grid-template-columns:1fr 1fr}}.cols h4{font-family:var(--cond);font-size:1.15rem;font-weight:700;margin:.5rem 0 .25rem}.cols ul{list-style:none;margin:0 0 1rem;padding:0}.cols li{position:relative;padding-left:1.4rem;margin:0 0 .65rem;font-size:1rem;line-height:1.5}.cols li::before{position:absolute;left:0;top:-.05rem;font-family:var(--cond);font-weight:800;font-size:1.3rem}.for li::before{content:"+";color:var(--sun-deep)}.against li::before{content:"–";color:var(--red)}.cols li b{font-weight:600}
+/* timeline */
+.tl{list-style:none;margin:1.5rem 0 0;padding:0;border-left:2px solid var(--rule)}.tl li{position:relative;padding:0 0 1.5rem 1.4rem}.tl li::before{content:"";position:absolute;left:-7px;top:.55rem;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--ink)}.tl li.hot::before{background:var(--red);border-color:var(--red)}.tl .when{font-family:var(--cond);font-weight:800;font-size:1.35rem;line-height:1.1;display:block;margin-bottom:.2rem}.tl p{margin-bottom:.4rem}.tl .aside{margin:.6rem 0 0;font-size:1.1rem}.status{background:var(--panel);border:1px solid var(--rule);border-left:6px solid var(--red);border-radius:6px;padding:1rem 1.1rem;margin:1.5rem 0}.status h3{margin-bottom:.4rem}.states{display:flex;flex-wrap:wrap;gap:.4rem;margin:.6rem 0 1rem}.states span{font-family:var(--cond);font-weight:700;font-size:1rem;padding:.2rem .6rem;border-radius:4px;background:var(--sun);color:#14225A}.states span.std{background:var(--dusk);color:#fff}.sources{font-size:.95rem;color:var(--muted);margin-top:3rem;border-top:1px solid var(--rule);padding-top:1rem}.sources ul{padding-left:1.1rem;margin:.5rem 0}.sources li{margin-bottom:.3rem}.cmp{font-family:var(--cond);font-weight:500;font-size:1.05rem;color:var(--muted);margin:.4rem 0 0}
+</style>
+</head>
+<body>
+<main>
+<p style="padding:1rem;border:1px solid var(--rule);margin-top:1rem;font-size:.9rem"><strong>Original draft.</strong> Preserved for comparison; includes claims corrected in the revision. <a href="../">Open the revised interactive explainer →</a></p>
+<p class="kicker">A daylight saving time explainer, scored like the 2019 Washington Nationals</p>
+<h1>Everybody wants to stop changing the clocks. The fight is over which clock.</h1>
+<p class="lede">In July the House voted to make daylight time permanent. The Senate hasn't moved. Here's what "permanent daylight time" and "permanent standard time" actually mean, the real case for and against each, and why an idea almost everyone likes keeps stranding runners in scoring position.</p>
+<div class="board" aria-label="2019 Nationals record">
+  <div class="team">WASHINGTON</div><div class="date" id="bdate">May 23, 2019</div>
+  <div class="rec"><span id="w">19</span>–<span id="l">31</span></div><div></div>
+  <div class="result" id="bres">World Series champions, Oct. 30</div>
+</div>
+<h2>The 19–31 part: the switch itself</h2>
+<p>On May 23, 2019 the Nationals were 19–31, twelve games under .500, and the manager's whole plan was to go 1–0 that day. Nobody argued about whether the start had been bad. They argued about what to do next.</p>
+<p>The clock debate has the same shape. The part nearly everyone agrees is bad is the switch: twice a year, every clock in the country jumps an hour and nothing good happens that week. Studies around the spring change find small but measurable bumps in car crashes, heart attacks, and workplace injuries in the days after. The fall change drops darkness on the evening commute overnight. Polls for years have found a majority wants to stop switching.</p>
+<p>Then it falls apart, because "stop switching" means two opposite things, and each one costs somebody an hour of light they care about.</p>
+<h2>Two ways to lock the clock</h2>
+<p><strong>Permanent daylight time</strong> means you never fall back. Clocks stay an hour ahead of the sun all year. Your summers don't change. Your winters get later sunrises <em>and</em> later sunsets. This is what the Sunshine Protection Act does.</p>
+<p><strong>Permanent standard time</strong> means you never spring forward. Clocks stay matched to the sun all year. Your winters don't change. Your summers get earlier sunrises <em>and</em> earlier sunsets. States can already choose this on their own; Arizona and Hawaii did.</p>
+<p>The total daylight is identical either way. You're only deciding which end of the day gets it. Drag the date and watch the three options separate.</p>
+<div class="planner">
+  <div class="controls"><div class="seg" role="group" aria-label="City">
+    <button type="button" data-city="dc" aria-pressed="true">Washington</button><button type="button" data-city="ind" aria-pressed="false">Indianapolis</button><button type="button" data-city="sf" aria-pressed="false">Sioux Falls</button>
+  </div></div>
+  <div class="datebar"><output id="dlabel" for="doy">Dec 21</output><small id="cityname">Washington, DC</small></div>
+  <input type="range" id="doy" min="1" max="365" value="355" aria-label="Day of the year">
+  <div class="chips"><button type="button" data-doy="85">Opening Day</button><button type="button" data-doy="172">Longest day</button><button type="button" data-doy="303">Game 7 night</button><button type="button" data-doy="355">Shortest day</button></div>
+  <div class="rows" id="rows">
+    <div class="mark a" style="left:0"><i>7:30 bus stop</i></div><div class="mark b" style="left:0"><i>5:30 drive home</i></div>
+    <div class="row" data-mode="switch"><div class="lab">Keep switching <span>today's law</span><span class="flag"></span></div><div class="band"><div class="day"></div></div><div class="times"><span>Sunrise <b class="rise"></b></span><span>Sunset <b class="set"></b></span></div></div>
+    <div class="row" data-mode="dst"><div class="lab">Permanent daylight time <span>never fall back</span><span class="flag"></span></div><div class="band"><div class="day"></div></div><div class="times"><span>Sunrise <b class="rise"></b></span><span>Sunset <b class="set"></b></span></div></div>
+    <div class="row" data-mode="std"><div class="lab">Permanent standard time <span>never spring forward</span><span class="flag"></span></div><div class="band"><div class="day"></div></div><div class="times"><span>Sunrise <b class="rise"></b></span><span>Sunset <b class="set"></b></span></div></div>
+  </div><div class="marks" id="marks"></div><p class="cmp" id="cmp"></p>
+</div>
+<p>Notice two things. In winter, "keep switching" is the same as permanent standard time, and in summer it's the same as permanent daylight time; the status quo is just both options stapled together. And the pain moves west: Indianapolis and Sioux Falls sit on the western edges of their time zones, so permanent daylight time pushes their December sunrises toward nine o'clock. That's the Senate's problem in one slider.</p>
+<h2>Scouting reports</h2>
+<section class="report sunny"><h3>Permanent daylight time</h3><p class="sub">Clocks an hour ahead of the sun, all year. The Sunshine Protection Act.</p>
+<div class="cols"><div class="for"><h4>The case for</h4><ul>
+<li><b>Light when people are awake to use it.</b> An hour after work and school in winter, instead of an hour before most people get up.</li>
+<li><b>Evening activity.</b> Retail, restaurants, golf, youth sports, and outdoor recreation all push for it. Some research ties evening light to less street crime and more physical activity.</li>
+<li><b>It's the bill that exists.</b> It passed the Senate by unanimous consent in 2022, the House 308–117 in July 2026, and the president is for it. Roughly 19 states have passed laws that take effect the moment Congress allows it.</li>
+</ul></div><div class="against"><h4>The case against</h4><ul>
+<li><b>Dark winter mornings.</b> Sunrise after 8 a.m. for weeks across much of the country, and after 9 on the western edges of time zones. Kids wait for buses in the dark.</li>
+<li><b>We tried it.</b> In January 1974, during the energy crisis, Congress made daylight time permanent. Approval collapsed within months after reports of children struck in dark mornings, and it was repealed by October, less than a year in.</li>
+<li><b>Sleep science is against it.</b> The American Academy of Sleep Medicine, the AMA, and most chronobiologists say morning light anchors the body clock. Permanent daylight time is a year-round hour of social jet lag.</li>
+</ul></div></div></section>
+<section class="report std"><h3>Permanent standard time</h3><p class="sub">Clocks matched to the sun, all year. What Arizona and Hawaii already do.</p>
+<div class="cols"><div class="for"><h4>The case for</h4><ul>
+<li><b>It matches the sun.</b> Solar noon lands near clock noon. Morning light is what sets sleep timing, mood, and alertness, which is why the medical groups endorse this option.</li>
+<li><b>Safer winter mornings.</b> Commuters and schoolchildren keep the daylight they have now, with no 1974 repeat.</li>
+<li><b>No act of Congress needed.</b> Federal law already lets a state opt out of daylight time. Any legislature could do this next session.</li>
+</ul></div><div class="against"><h4>The case against</h4><ul>
+<li><b>Summer evenings end an hour earlier.</b> A late-June sunset in Washington moves from about 8:37 to about 7:37. Sunrise moves to about 4:45, light almost everyone sleeps through.</li>
+<li><b>Less popular when it's real.</b> Business and recreation groups oppose it, and despite the option being available for decades, almost no state has taken it. Polls are split and shift with the question's wording.</li>
+<li><b>No vehicle.</b> There is no permanent-standard-time bill moving in Congress. Its path is state by state, or by amending the bill the House already passed.</li>
+</ul></div></div></section>
+<section class="report"><h3>Keep switching</h3><p class="sub">The default. What happens if the Senate does nothing.</p>
+<p>You get the summer evenings and the winter mornings, and you pay for them with two disruptive weeks a year. It's the least popular option in most polls and the one the country has actually chosen for sixty years, because every time Congress gets close to picking a side, one side's hour of light turns out to matter more than the other side expected.</p></section>
+<h2>The box score: politics and status</h2>
+<ol class="tl">
+<li><span class="when">1918 to 1966</span><p>Daylight time arrives as a wartime measure, gets repealed, and spends decades as a patchwork of local rules. The Uniform Time Act of 1966 sets national dates and lets states opt out, but only toward standard time, never toward year-round daylight time. That asymmetry is why the whole fight runs through Congress.</p></li>
+<li><span class="when">January 1974</span><p>Nixon signs emergency permanent daylight time to save energy. It's popular for about a month. By October Congress has repealed it.</p><p class="aside"><b>2019</b>A ten-month season that ended badly. Everyone remembers it; nobody wants the sequel.</p></li>
+<li><span class="when">2007</span><p>The current March-to-November schedule takes effect, stretching daylight time to eight months of the year.</p></li>
+<li><span class="when">2018</span><p>Florida passes the first state "trigger" law for year-round daylight time. Marco Rubio introduces the Sunshine Protection Act. It dies in committee in 2018 and again in 2019. The 2021 version is the one that eventually passes the Senate.</p><p class="aside"><b>2019</b>The Nats open the season with Harper gone and the bullpen on fire. May 23: 19–31.</p></li>
+<li><span class="when">March 15, 2022</span><p>The Senate passes the bill by unanimous consent with no debate. Several senators later say they didn't realize it was happening. The House never takes it up.</p><p class="aside"><b>2019</b>The Wild Card game looked over in the 8th too, down 3–1 to Josh Hader. Then Soto's single skipped past Trent Grisham.</p></li>
+<li><span class="when">2025</span><p>Reintroduced as H.R. 139 and S. 29. The president's position moves: in late 2024 he says Republicans will eliminate daylight time; by spring 2025 he calls it a fifty-fifty issue; then he lands on permanent daylight time. Senate Commerce holds a hearing on the idea in April.</p></li>
+<li class="hot"><span class="when">July 14, 2026</span><p>The House passes H.R. 139, 308–117, after moving through Energy and Commerce as part of a larger motor-vehicle package. The Senate passed the bill in 2022; now the House has too, though in a different Congress, so it has to clear the Senate again.</p><p class="aside"><b>2019</b>Kendrick's grand slam off Joe Kelly in the 10th, Game 5 in Los Angeles. The one that made the rest possible.</p></li>
+<li class="hot"><span class="when">July 15, 2026 to now</span><p>Received in the Senate and referred to the Commerce Committee, where it sits. Majority Leader John Thune has said he voted against a similar bill in committee because of what it does to South Dakota winter sunrises, and that whether 60 votes exist "remains to be seen." The president has been posting pressure on the Senate since August.</p><p class="aside"><b>2019</b>Houston, Game 7, Astros up 2–0 in the 7th. The Nats had won every road game of the Series. They'd still have to do it one more time.</p></li>
+<li><span class="when">November 1, 2026</span><p>Clocks fall back regardless. Nothing in the pipeline changes this fall.</p><p class="aside"><b>2019</b>The parade down Constitution Avenue was November 2. The clocks fell back that night, and they gave the city one extra hour to celebrate.</p></li>
+</ol>
+<div class="status"><h3>Where it stands today, October 3, 2026</h3>
+<p>Not the bottom of the ninth. Call it the seventh. The House has passed it, and the Senate, which passed an earlier version in 2022, is where it has to clear again. Between it and the president's desk: a committee chair's calendar, a filibuster that needs 60 votes, and a majority leader from the Dakotas who has already voted no once. States that want standard time instead would have to opt out before enactment, so a Senate vote would also set off a scramble in state capitals.</p>
+<p>If you want to watch one thing, watch whether Commerce schedules a markup. If it doesn't happen before the end of this Congress, the bill dies on January 3 and starts over.</p></div>
+<h2>Where the states stand</h2>
+<p>About 19 states have passed laws or resolutions to adopt year-round daylight time the moment federal law allows, among them:</p>
+<div class="states"><span>Florida</span><span>Texas</span><span>Georgia</span><span>Oregon</span><span>Colorado</span><span>Delaware</span><span>Louisiana</span><span>Mississippi</span><span>Oklahoma</span><span>Alabama</span></div>
+<p>Two already live on permanent standard time, which federal law allows without asking anyone:</p>
+<div class="states"><span class="std">Arizona (except the Navajo Nation)</span><span class="std">Hawaii</span></div>
+<p>Dozens of other legislatures have debated one option or the other without passing anything. The pattern is consistent: the states lining up for daylight time are mostly southern, where winter mornings aren't that dark anyway. The loudest skeptics are northern and western, where they are.</p>
+<p class="aside" style="margin-top:2.5rem"><b>2019</b>Stay in the fight.</p>
+<div class="sources"><p>Status as of October 3, 2026. Sun times are computed with a standard solar-position formula for each city and are accurate to within a few minutes; they use 2026's switch dates (March 8 and November 1) for the "keep switching" row.</p><ul>
+<li><a href="https://www.congress.gov/bill/119th-congress/house-bill/139">H.R. 139, Sunshine Protection Act of 2025, Congress.gov</a></li>
+<li><a href="https://energycommerce.house.gov/posts/house-passes-legislation-to-make-daylight-saving-time-permanent">House Energy and Commerce Committee, July 14, 2026</a></li>
+<li><a href="https://thehill.com/homenews/administration/6031829-trump-urges-senate-daylight-saving-bill/">The Hill on Senate prospects and Thune's position, August 2026</a></li>
+<li><a href="https://time.com/article/2026/07/14/daylight-saving-time-permanent-bill-house/">TIME on the House vote and state trigger laws</a></li>
+<li><a href="https://www.sleepfoundation.org/sleep-news/latest-updates-daylight-saving-time-legislation-change">Sleep Foundation legislative tracker</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Sunshine_Protection_Act">Sunshine Protection Act history, Wikipedia</a></li>
+</ul></div>
+</main>
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* Hero scoreboard: 19-31 on May 23 to 93-69 at season's end */
+  var w=document.getElementById('w'), l=document.getElementById('l'), bd=document.getElementById('bdate'), br=document.getElementById('bres');
+  function finish(){ w.textContent='93'; l.textContent='69'; bd.textContent='Sept. 29, 2019'; br.classList.add('on'); }
+  if(reduce){ finish(); } else{
+    var t0=null, dur=2200;
+    function step(ts){if(!t0) t0=ts;var p=Math.min(1,(ts-t0)/dur);var e=1-Math.pow(1-p,3);w.textContent=Math.round(19+74*e);l.textContent=Math.round(31+38*e);if(p<1) requestAnimationFrame(step);else{finish();}}
+    setTimeout(function(){requestAnimationFrame(step);},600);
+  }
+  /* Day planner */
+  var CITIES={dc:{name:'Washington, DC',lat:38.907,lng:-77.037,std:-5},ind:{name:'Indianapolis, IN',lat:39.768,lng:-86.158,std:-5},sf:{name:'Sioux Falls, SD',lat:43.546,lng:-96.731,std:-6}};
+  var city='dc';var WIN_START=4,WIN_END=22;var BUS=7.5,HOME=17.5;var DST_START=67,DST_END=305;
+  function sun(doy,lat,lng,tz){var rad=Math.PI/180;var g=2*Math.PI/365*(doy-1+0.5);var eq=229.18*(0.000075+0.001868*Math.cos(g)-0.032077*Math.sin(g)-0.014615*Math.cos(2*g)-0.040849*Math.sin(2*g));var d=0.006918-0.399912*Math.cos(g)+0.070257*Math.sin(g)-0.006758*Math.cos(2*g)+0.000907*Math.sin(2*g)-0.002697*Math.cos(3*g)+0.00148*Math.sin(3*g);var ha=Math.acos(Math.cos(90.833*rad)/(Math.cos(lat*rad)*Math.cos(d))-Math.tan(lat*rad)*Math.tan(d))/rad;return[(720-4*(lng+ha)-eq)/60+tz,(720-4*(lng-ha)-eq)/60+tz];}
+  function fmt(h){var m=Math.round(h*60),hh=Math.floor(m/60),mm=m%60,ap=hh>=12?'pm':'am';var h12=hh%12;if(h12===0) h12=12;return h12+':'+(mm<10?'0':'')+mm+' '+ap;}
+  function pct(h){return Math.max(0,Math.min(100,(h-WIN_START)/(WIN_END-WIN_START)*100));}
+  var MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  function dateLabel(doy){var d=new Date(2026,0,doy);return MONTHS[d.getMonth()]+' '+d.getDate();}
+  var slider=document.getElementById('doy'),dlabel=document.getElementById('dlabel'),cityname=document.getElementById('cityname'),cmp=document.getElementById('cmp');
+  var rows=Array.prototype.slice.call(document.querySelectorAll('.row'));
+  var marks=document.getElementById('marks');
+  [6,9,12,15,18,21].forEach(function(h){var s=document.createElement('span');s.style.left=pct(h)+'%';s.textContent=h===12?'noon':(h>12?(h-12)+' pm':h+' am');marks.appendChild(s);rows.forEach(function(r){var t=document.createElement('div');t.className='tick';t.style.left=pct(h)+'%';r.querySelector('.band').appendChild(t);});});
+  document.querySelector('.mark.a').style.left=pct(BUS)+'%';document.querySelector('.mark.b').style.left=pct(HOME)+'%';
+  function update(){var doy=+slider.value,c=CITIES[city];dlabel.textContent=dateLabel(doy);cityname.textContent=c.name;var isDst=doy>=DST_START&&doy<DST_END;var res={};rows.forEach(function(r){var mode=r.getAttribute('data-mode');var tz=mode==='dst'?c.std+1:(mode==='std'?c.std:(isDst?c.std+1:c.std));var s=sun(doy,c.lat,c.lng,tz);res[mode]=s;var day=r.querySelector('.day');day.style.left=pct(s[0])+'%';day.style.width=(pct(s[1])-pct(s[0]))+'%';r.querySelector('.rise').textContent=fmt(s[0]);r.querySelector('.set').textContent=fmt(s[1]);var flag=r.querySelector('.flag'),f='';if(s[0]>BUS) f='dark bus stop';if(s[1]<HOME) f=f?f+', dark drive home':'dark drive home';flag.textContent=f;});var diffRise=Math.round((res.dst[0]-res.std[0])*60),txt;if(doy>=DST_START&&doy<DST_END)txt='Today\u2019s law already runs on daylight time this date, so permanent daylight time changes nothing here. Permanent standard time would move both ends of the day an hour earlier.';else txt='Today\u2019s law runs on standard time this date, so permanent standard time changes nothing here. Permanent daylight time would move both ends of the day an hour later.';cmp.textContent=txt;}
+  slider.addEventListener('input',update);
+  Array.prototype.forEach.call(document.querySelectorAll('.chips button'),function(b){b.addEventListener('click',function(){slider.value=b.getAttribute('data-doy');update();});});
+  Array.prototype.forEach.call(document.querySelectorAll('.seg button'),function(b){b.addEventListener('click',function(){city=b.getAttribute('data-city');Array.prototype.forEach.call(document.querySelectorAll('.seg button'),function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});update();});});
+  update();
+})();
+</script>
+</body>
+</html>
